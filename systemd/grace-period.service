@@ -1,0 +1,9 @@
+[Unit]
+Description=Deadline for members who have not finished the setup step
+
+[Service]
+Type=oneshot
+# Fill in the group, the directory the setup step leaves a file in, and the
+# days a member is given. Run with -dry-run once before enabling the timer,
+# since a wrong -marker-dir hands a deadline to everybody
+ExecStart=/usr/local/sbin/grace-period -group GROUP -marker-dir DIR -days 7

@@ -1,0 +1,31 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    # chage and /etc/shadow are what this reads and writes, so there is nowhere
+    # else for it to run
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+
+archives:
+  - formats:
+      - binary
+
+changelog:
+  sort: desc
+
+release:
+  draft: false

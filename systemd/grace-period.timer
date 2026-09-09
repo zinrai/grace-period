@@ -1,0 +1,12 @@
+[Unit]
+Description=Deadline for members who have not finished the setup step
+
+[Timer]
+# The deadline is a date, so once a day is enough. A run that is missed changes
+# nothing: an account already given a deadline keeps it, and pam_unix still
+# refuses the login once the date has passed
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
